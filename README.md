@@ -1,4 +1,6 @@
 # send-sqs-wiremockextension
+![dockerhub](https://img.shields.io/docker/cloud/build/yanbrandao/send-sqs-wiremock-extension) ![docker pull](https://img.shields.io/docker/pulls/yanbrandao/send-sqs-wiremock-extension) 
+
 Send-SQS-Transform is a [Wiremock](http://wiremock.org/) extension to send sqs message in background when receive a request in stub-server to validate async backend scenarios.
 
 In simples words, when request is defined in mapping, you can send metadata to define a message to send in background to an amazon sqs queue.
