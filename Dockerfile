@@ -4,7 +4,7 @@ WORKDIR /home/wiremock
 
 COPY . .
 
-#RUN mvn clean install -DskipTests
+RUN mvn clean install -DskipTests
 
 FROM wiremock/wiremock AS final
 
