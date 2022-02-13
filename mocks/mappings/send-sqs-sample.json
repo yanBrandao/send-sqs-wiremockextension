@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/operation",
+    "bodyPatterns" : [
+      {
+        "matchesJsonPath" : "$.metadata.queue_name"
+      },
+      {
+        "matchesJsonPath" : "$.metadata.profile"
+      },
+      {
+        "matchesJsonPath" : "$.metadata.container_name"
+      },
+      {
+        "matchesJsonPath" : "$.data"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "transformers": ["async-send-sqs"]
+  }
+}
