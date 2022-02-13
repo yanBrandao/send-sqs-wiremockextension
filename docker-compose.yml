@@ -4,7 +4,7 @@ services:
 
   localstack:
     image: localstack/localstack:latest
-    container_name: woodriver_localstack
+    container_name: localstack
     environment:
       - AWS_DEFAULT_REGION=sa-east-1
       - SERVICES=sqs
@@ -16,12 +16,11 @@ services:
       - "./localstack/run.sh:/docker-entrypoint-initaws.d/run.sh"
 
   wiremock:
-    build:
-      context: .
-    container_name: woodriver_wiremock
+    image: yanbrandao/send-sqs-wiremock-extension:latest
+    container_name: wiremock
     volumes:
       - "./mocks/mappings:/home/wiremock/mappings"
     ports:
       - "8080:8080"
-    command: ["--extensions \"com.github.extension.SendSQSTransform\"" ]
+    command: --extensions "com.github.extension.SendSQSTransform"
 

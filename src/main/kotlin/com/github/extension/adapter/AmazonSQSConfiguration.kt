@@ -12,11 +12,11 @@ class AmazonSQSConfiguration(
 ) {
 
     fun amazonSQSClient(profile: SQSProfile): AmazonSQSAsync{
-        println("Starting to define SQS Client with [profile=${profile.environment}] and [url=http://${profile.containerName}:4566] and [queue=${profile.queueName}]",)
+        println("Starting to define SQS Client with [profile=${profile.environment}] and [url=http://${profile.containerAddress}:4566] and [queue=${profile.queueName}]",)
         return when (profile.environment) {
             Local -> amazonSQSAsyncLocal()
             Cloud -> amazonSQSAsync()
-            InDocker -> amazonSQSAsyncLocal("http://${profile.containerName}:4566")
+            InDocker -> amazonSQSAsyncLocal("http://${profile.containerAddress}:4566")
         }
     }
 

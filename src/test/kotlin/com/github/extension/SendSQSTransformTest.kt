@@ -31,7 +31,7 @@ class SendSQSTransformTest {
         val payload = InputPayload(metadata = InputPayload.MetaData(
             queueName = "sample-queue",
             profile = "Local",
-            containerName = "localhost")).objectToJson()
+            containerAddress = "localhost")).objectToJson()
 
         given()
             .contentType("application/json")

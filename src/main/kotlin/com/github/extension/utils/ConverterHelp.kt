@@ -7,7 +7,7 @@ import com.github.extension.model.InputPayload
 fun InputPayload.toProfile(): SQSProfile =
     SQSProfile(
         queueName = this.metadata.queueName,
-        containerName = this.metadata.containerName,
+        containerAddress = this.metadata.containerAddress,
         environment = when(this.metadata.profile) {
             Local.name -> Local
             Cloud.name -> Cloud

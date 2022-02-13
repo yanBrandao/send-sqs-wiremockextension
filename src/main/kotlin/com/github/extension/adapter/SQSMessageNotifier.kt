@@ -11,14 +11,14 @@ data class SQSMessageNotifier(
 
     private val queueMessenger = AmazonSQSConfiguration(
             AmazonSQSProperties(
-                endpoint = "http://${profile.containerName}:4566"
+                endpoint = "http://${profile.containerAddress}:4566"
             )
         ).amazonSQSClient(profile)
 
     fun sendMessage(message: Any): SendMessageResult {
         val url = when(profile.environment) {
             Cloud -> queueMessenger.getQueueUrl(profile.queueName).queueUrl
-            Local, InDocker -> profile.queueName.getLocalQueueURL(profile.containerName)
+            Local, InDocker -> profile.queueName.getLocalQueueURL(profile.containerAddress)
         }
 
         println("Get full [URL=$url]")

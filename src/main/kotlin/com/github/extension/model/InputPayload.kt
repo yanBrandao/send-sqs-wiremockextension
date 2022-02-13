@@ -10,7 +10,7 @@ data class InputPayload(
         @JsonProperty("queue_name")
         val queueName: String,
         val profile: String,
-        @JsonProperty("container_name")
-        val containerName: String
+        @JsonProperty("container_address")
+        val containerAddress: String
     )
 }

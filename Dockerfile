@@ -4,9 +4,9 @@ WORKDIR /home/wiremock
 
 COPY . .
 
-RUN mvn clean install -DskipTests
+#RUN mvn clean install -DskipTests
 
 FROM wiremock/wiremock AS final
 
-COPY --from=build /home/wiremock/target/async-send-sqs-wiremockextension-0.0.1.jar /var/wiremock/extensions/wiremock-extension.jar
+COPY --from=build /home/wiremock/target/async-send-sqs-wiremockextension-*.jar /var/wiremock/extensions/wiremock-extension.jar
 
