@@ -10,7 +10,7 @@
         "matchesJsonPath" : "$.metadata.profile"
       },
       {
-        "matchesJsonPath" : "$.metadata.container_address"
+        "matchesJsonPath" : "$.metadata.sqs_url"
       },
       {
         "matchesJsonPath" : "$.data"

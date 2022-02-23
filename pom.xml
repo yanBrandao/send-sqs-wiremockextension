@@ -19,7 +19,7 @@
 
     <groupId>com.github</groupId>
     <artifactId>async-send-sqs-wiremockextension</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.5</version>
     <packaging>jar</packaging>
     <name>Wiremock Extension Send Async SQS Message</name>
     <description>A Wiremock extension to send async message in SQS</description>

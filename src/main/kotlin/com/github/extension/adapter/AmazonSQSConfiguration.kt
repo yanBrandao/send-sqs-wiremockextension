@@ -6,17 +6,20 @@ import com.amazonaws.client.builder.AwsClientBuilder
 import com.amazonaws.services.sqs.AmazonSQSAsync
 import com.amazonaws.services.sqs.AmazonSQSAsyncClientBuilder
 import com.github.extension.adapter.SQSProfile.SQSEnvironment.*
+import com.github.extension.utils.objectToJson
 
 class AmazonSQSConfiguration(
     private val amazonSQSProperties: AmazonSQSProperties
 ) {
 
     fun amazonSQSClient(profile: SQSProfile): AmazonSQSAsync{
-        println("Starting to define SQS Client with [profile=${profile.environment}] and [url=http://${profile.containerAddress}:4566] and [queue=${profile.queueName}]",)
+        println("Starting to define SQS Client with [profile=${profile.environment}] and [url=${profile.sqsUrl}] and [queue=${profile.queueName}]",)
         return when (profile.environment) {
             Local -> amazonSQSAsyncLocal()
             Cloud -> amazonSQSAsync()
-            InDocker -> amazonSQSAsyncLocal("http://${profile.containerAddress}:4566")
+            InDocker -> amazonSQSAsyncLocal(profile.sqsUrl)
+        }.also {
+            println("Done to define SQS Client with [profile=${profile.environment}] and [url=${profile.sqsUrl}] and [queue=${profile.queueName}]")
         }
     }
 
@@ -43,7 +46,8 @@ class AmazonSQSConfiguration(
         BasicAWSCredentials(amazonSQSProperties.accessKey, amazonSQSProperties.secretKey)
 
     private fun amazonSQSAsync(): AmazonSQSAsync {
-        return AmazonSQSAsyncClientBuilder.defaultClient()
+        return AmazonSQSAsyncClientBuilder.standard()
+            .withRequestHandlers().build()
     }
 
 }

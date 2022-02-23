@@ -7,7 +7,7 @@ import com.github.extension.model.InputPayload
 fun InputPayload.toProfile(): SQSProfile =
     SQSProfile(
         queueName = this.metadata.queueName,
-        containerAddress = this.metadata.containerAddress,
+        sqsUrl = this.metadata.sqsUrl,
         environment = when(this.metadata.profile) {
             Local.name -> Local
             Cloud.name -> Cloud
@@ -16,4 +16,4 @@ fun InputPayload.toProfile(): SQSProfile =
         }
     )
 
-fun String.getLocalQueueURL(environment: String) = "http://$environment:4566/000000000000/$this"
+fun String.getLocalQueueURL(sqsUrl: String) = "$sqsUrl/$this"
